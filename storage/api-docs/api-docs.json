@@ -1,0 +1,361 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Toros y Vacas",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/"
+        }
+    ],
+    "paths": {
+        "/api/games/all": {
+            "get": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Show all games",
+                "operationId": "2037f933d8334f427a6247fc59e3ce2c",
+                "responses": {
+                    "200": {
+                        "description": "Show all games"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/games/store": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Save a new game",
+                "operationId": "0a3698bf1a8c8b82b48d26cb93164563",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "user": {
+                                                "type": "string"
+                                            },
+                                            "age": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "user": "david",
+                                    "age": "36"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "CREATED",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "user": {
+                                            "type": "string",
+                                            "example": "david"
+                                        },
+                                        "age": {
+                                            "type": "number",
+                                            "example": "36"
+                                        },
+                                        "number": {
+                                            "type": "string",
+                                            "example": "1984"
+                                        },
+                                        "intents": {
+                                            "type": "number",
+                                            "example": "2"
+                                        },
+                                        "time": {
+                                            "type": "string",
+                                            "example": "04:15:02"
+                                        },
+                                        "state": {
+                                            "type": "boolean",
+                                            "example": "1"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/games/combination": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Send a number to check in play",
+                "operationId": "782ff393ed5ec21156804b05dfac2190",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "user": {
+                                                "type": "string"
+                                            },
+                                            "combination": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "id": "12",
+                                    "user": "pepe",
+                                    "combination": "1879"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "combination": {
+                                            "type": "string",
+                                            "example": 1948
+                                        },
+                                        "evaluation": {
+                                            "type": "number",
+                                            "example": "2"
+                                        },
+                                        "ranking": {
+                                            "type": "number",
+                                            "example": "3"
+                                        },
+                                        "intents": {
+                                            "type": "number",
+                                            "example": "3"
+                                        },
+                                        "availableTime": {
+                                            "type": "string",
+                                            "example": "1984"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "example": "2T1V"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Game not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The game not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Game ended!",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Game ended!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Combination invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Combination invalid"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/games/show": {
+            "post": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "View the info of a game",
+                "operationId": "1fb831188dc7ed9890832cfd4f4fe0ef",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "user": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "id": "1",
+                                    "user": "david"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "not found"
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/api/games/destroy": {
+            "delete": {
+                "tags": [
+                    "Games"
+                ],
+                "summary": "Delete a game",
+                "operationId": "179facd97a9f91b1d5f4708d7f0c1a0c",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "user": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "id": "1",
+                                    "user": "David"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Game deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Game deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "description": "An authoirization header",
+                "name": "X-API-KEY",
+                "in": "header"
+            }
+        }
+    }
+}
